@@ -1,4 +1,4 @@
-from PySide2.QtWidgets import QMainWindow   
+from PySide2.QtWidgets import QMainWindow, QFileDialog ,QMessageBox
 from ui_mainWindow import Ui_MainWindow
 from particle import Particle
 from particle_list import  Particle_List
@@ -12,6 +12,52 @@ class MainWindow(QMainWindow):
         self.ui.addToStart_pushButton.clicked.connect(self.click_addStart)
         self.ui.addEnd_pushButton.clicked.connect(self.click_addEnd)
         self.ui.showListParticle_pushButton.clicked.connect(self.click_show)
+        self.ui.actionAbrir.triggered.connect(self.action_abrir)
+        self.ui.actionGuardar.triggered.connect(self.action_guardar)
+
+    
+
+    def action_abrir(self):
+        ubicacion = QFileDialog.getOpenFileName(
+            self,
+            'Abrir Archivo',
+            '.',
+            'JSON (*.json)'
+        ) [0]
+        if(self.particle_list.abrir(ubicacion)):
+            QMessageBox.information(
+                self,
+                "Exito",
+                "Se pudo abrir el archivo" + ubicacion
+            )
+        else:
+            QMessageBox.critical(
+                self,
+                "Error",
+                "No se pudo abrir el archivo" + ubicacion
+            )
+
+
+    def action_guardar(self):
+
+        ubicacion = QFileDialog.getSaveFileName(
+            self,
+            'Guardar Archivo',
+            '.',
+            'JSON (*.json)'
+        ) [0]
+        if(self.particle_list.guardar(ubicacion)):
+            QMessageBox.information(
+                self,
+                "Exito",
+                "Se pudo crear el archivo" + ubicacion
+            )
+        else:
+            QMessageBox.critical(
+                self,
+                "Error",
+                "No se pudo crear el archivo" + ubicacion
+            )
 
     def click_addStart(self):
         self.particle_list.addFirst(self.make_particle())

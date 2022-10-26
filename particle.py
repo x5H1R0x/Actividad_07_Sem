@@ -1,17 +1,17 @@
 from algorithms import euclidean_distance
 
 class Particle:
-    def __init__(self,id, ori_X=0, ori_Y=0, dest_X=0, dest_Y=0, speed=0, R=0, G=0, B=0):
+    def __init__(self, id, origen_x=0, origen_y=0, destino_x=0, destino_y=0, velocidad=0, red=0, green=0, blue=0):
         self.__id = id
-        self.__origen_x = ori_X
-        self.__origen_y = ori_Y
-        self.__destino_x = dest_X
-        self.__destino_y = dest_Y
-        self.__velocidad = speed
-        self.__red = R
-        self.__green = G
-        self.__blue = B
-        self.__distancia = euclidean_distance(ori_X, ori_Y, dest_X, dest_Y)
+        self.__origen_x = origen_x
+        self.__origen_y = origen_y
+        self.__destino_x = destino_x
+        self.__destino_y = destino_y
+        self.__velocidad = velocidad
+        self.__red = red
+        self.__green = green
+        self.__blue = blue
+        self.__distancia = euclidean_distance(origen_x, origen_y, destino_x, destino_y)
     
     def __str__(self) -> str:
         return(
@@ -27,3 +27,18 @@ class Particle:
             '\nDistancia: ' + str(self.__distancia) +
             '\n'
         )
+
+    def to_dict(self):
+        return{
+            
+            "id": self.__id,
+            "origen_x": self.__origen_x,
+            "origen_y": self.__origen_y,
+            "destino_x": self.__destino_x,
+            "destino_y": self.__destino_y,
+            "velocidad": self.__velocidad,
+            "red": self.__red,
+            "green": self.__green,
+            "blue": self.__blue
+
+        }

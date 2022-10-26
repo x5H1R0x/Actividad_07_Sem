@@ -1,3 +1,4 @@
+import json
 from particle import Particle
 
 class Particle_List:
@@ -18,3 +19,23 @@ class Particle_List:
         return "".join(
             str(particle) for particle in self.__Particles
         )
+
+    def guardar(self, ubicacion):
+        try:
+            with open(ubicacion, 'w') as archivo:
+                lista = [particle.to_dict() for particle in self.__Particles]
+                json.dump(lista, archivo, indent=5)
+            return 1
+        except:
+            return 0
+
+
+    def abrir(self, ubicacion):
+        try:
+            with open(ubicacion, 'r') as archivo:
+                lista = json.load(archivo)
+                self.__Particles =[Particle(**part) for part in lista]
+                
+            return 1
+        except:
+            return 0

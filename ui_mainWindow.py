@@ -18,6 +18,10 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(638, 620)
+        self.actionAbrir = QAction(MainWindow)
+        self.actionAbrir.setObjectName(u"actionAbrir")
+        self.actionGuardar = QAction(MainWindow)
+        self.actionGuardar.setObjectName(u"actionGuardar")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
@@ -106,10 +110,16 @@ class Ui_MainWindow(object):
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
         self.menubar.setGeometry(QRect(0, 0, 638, 21))
+        self.menuAbrir = QMenu(self.menubar)
+        self.menuAbrir.setObjectName(u"menuAbrir")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
+
+        self.menubar.addAction(self.menuAbrir.menuAction())
+        self.menuAbrir.addAction(self.actionAbrir)
+        self.menuAbrir.addAction(self.actionGuardar)
 
         self.retranslateUi(MainWindow)
 
@@ -118,6 +128,14 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.actionAbrir.setText(QCoreApplication.translate("MainWindow", u"Abrir", None))
+#if QT_CONFIG(shortcut)
+        self.actionAbrir.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+O", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionGuardar.setText(QCoreApplication.translate("MainWindow", u"Guardar", None))
+#if QT_CONFIG(shortcut)
+        self.actionGuardar.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+S", None))
+#endif // QT_CONFIG(shortcut)
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"GroupBox", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Destino X:", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"Destino Y:", None))
@@ -131,5 +149,6 @@ class Ui_MainWindow(object):
         self.originX_label.setText(QCoreApplication.translate("MainWindow", u"Origen X:", None))
         self.originY_label.setText(QCoreApplication.translate("MainWindow", u"Origen Y:", None))
         self.originX_label_2.setText(QCoreApplication.translate("MainWindow", u"Id:", None))
+        self.menuAbrir.setTitle(QCoreApplication.translate("MainWindow", u"Archivo", None))
     # retranslateUi
 
